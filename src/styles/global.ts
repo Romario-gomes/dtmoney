@@ -27,7 +27,7 @@ export const GlobalStyle = createGlobalStyle`
   }
  }
   body {
-    background-color: (--background);
+    background-color: var(--background);
     -webkit-font-smoothing: antialiased;
   }
   
