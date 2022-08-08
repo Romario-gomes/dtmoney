@@ -8,6 +8,7 @@ import { api } from "../../services/api";
 import { TransactionTypeContainer, RadioBox, Container } from "./styles";
 import { FormEvent, useState, useContext } from "react";
 import { TransactionsContext } from "../../TransactionsContext";
+import { on } from "stream";
 
 interface NewTransactionModalProps {
   isOpen: boolean;
@@ -23,10 +24,17 @@ export function NewTransactionModal({isOpen, onRequestClose}: NewTransactionModa
 
   const [type, setType] = useState('deposit');
 
-  function handleCreaetNewTransaction (event: FormEvent) {
+  async function handleCreaetNewTransaction (event: FormEvent) {
     event.preventDefault();
 
-    createTransaction({ title, amount, category, type });
+    await createTransaction({ title, amount, category, type });
+
+    setTitle('');
+    setAmount(0);
+    setCategory('');
+    setType('deposit')
+
+    onRequestClose()
   }
 
   return (
